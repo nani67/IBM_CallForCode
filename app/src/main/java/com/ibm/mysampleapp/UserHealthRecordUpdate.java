@@ -2,6 +2,7 @@ package com.ibm.mysampleapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -82,6 +83,10 @@ public class UserHealthRecordUpdate extends AppCompatActivity {
                     String emailAddresss = null;
 
 
+
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+                    emailAddresss = pref.getString("uName", null);
+
                     URI cloudantUri = new URI(getApplicationContext().getResources().getString(R.string.cloudantUrl) + "/personal_info/" + emailAddresss);
 
                     final EditText userName = findViewById(R.id.userAllergies);
@@ -93,10 +98,9 @@ public class UserHealthRecordUpdate extends AppCompatActivity {
                     final EditText userRelationsPhNos = findViewById(R.id.userMedications);
                     final EditText userEmail = findViewById(R.id.userImmunizationDates);
 
-
                     Datastore dsOne = manager.openDatastore("health_info");
 
-                    DocumentRevision documentRevision = new DocumentRevision(userEmail.getText().toString());
+                    DocumentRevision documentRevision = new DocumentRevision(emailAddresss);
                     DocumentBody documentBody = DocumentBodyFactory.create(new HashMap<String, String>() {{
                         put("UserAllergies", userName.getText().toString());
                         put("UserIfUndergoneSurgery", userMobNo.getText().toString());
@@ -138,7 +142,6 @@ public class UserHealthRecordUpdate extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
 
         if(requestCode==3 && resultCode == Activity.RESULT_OK && clickedRadiologyBtn) {
             Uri selectedImage = data.getData();

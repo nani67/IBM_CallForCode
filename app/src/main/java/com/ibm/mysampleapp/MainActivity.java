@@ -1,7 +1,9 @@
 package com.ibm.mysampleapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cloudant.mazha.Document;
 import com.cloudant.sync.datastore.DocumentBody;
 import com.cloudant.sync.datastore.DocumentBodyFactory;
 import com.cloudant.sync.datastore.DocumentException;
@@ -27,6 +30,7 @@ import com.cloudant.sync.datastore.DatastoreNotCreatedException;
 
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -69,16 +73,30 @@ public class MainActivity extends AppCompatActivity
                 EditText pass = findViewById(R.id.editText2);
 
 
+
                 try {
                     cloudantUri = new java.net.URI(getApplicationContext().getResources().getString(R.string.cloudantUrl) + "/personal_info/" + loginID.getText().toString());
 
+                    Datastore userDetails = manager.openDatastore("personal_info_loginCred");
 
-                    Datastore userDetails = manager.openDatastore(loginID.getText().toString());
+                    List<String> apple = userDetails.getAllDocumentIds();
 
-                    DocumentRevision a = userDetails.getDocument("UserPassword");
+                    for (String z: apple) {
+                        Log.d("Document ID: ", z);
+
+                    }
+
+
+                    DocumentRevision a = userDetails.getDocument(loginID.getText().toString());
                     DocumentBody documentBody = a.getBody();
                     Map<String, Object> hashMap = documentBody.asMap();
                     if(hashMap.containsValue(pass.getText().toString())) {
+
+                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                        SharedPreferences.Editor editor = pref.edit();
+
+                        editor.putString("uName", loginID.getText().toString());
+
                         startActivity(new Intent(MainActivity.this, UserHealthRecordUpdate.class));
 
                     } else {
@@ -109,6 +127,11 @@ public class MainActivity extends AppCompatActivity
 
                     cloudantUri = new java.net.URI(getApplicationContext().getResources().getString(R.string.cloudantUrl) + "/personal_info/" + userEmail.getText().toString());
 
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = pref.edit();
+
+                    editor.putString("uName", userEmail.getText().toString());
+
                     final EditText userName = findViewById(R.id.userName);
                     final EditText userMobNo = findViewById(R.id.userMobileNumber);
                     final EditText userDOB = findViewById(R.id.userDateOfBirth);
@@ -122,7 +145,6 @@ public class MainActivity extends AppCompatActivity
                     final EditText insuranceComName = findViewById(R.id.userInsuranceCompanyName);
                     final EditText insurancePolicyNo = findViewById(R.id.userInsurancePolicyNo);
                     final EditText password = findViewById(R.id.userPassword);
-
 
                     Datastore dsOne = manager.openDatastore("personal_info_loginCred");
                     Datastore dsTwo = manager.openDatastore("personal_info_immutable");
@@ -144,10 +166,11 @@ public class MainActivity extends AppCompatActivity
                         put("InsuranceCompanyValue",insurancePolicyNo.getText().toString());
 
                     }});
+
                     documentRevision.setBody(documentBody);
                     dsTwo.createDocumentFromRevision(documentRevision);
 
-                    DocumentRevision documentRevision2 = new DocumentRevision();
+                    DocumentRevision documentRevision2 = new DocumentRevision(userEmail.getText().toString());
                     DocumentBody documentBody2 = DocumentBodyFactory.create(new HashMap<String, String>() {{
                         put("UserName",userName.getText().toString());
                         put("UserMobileNumber",userMobNo.getText().toString());
