@@ -83,8 +83,10 @@ public class UserHealthRecordUpdate extends AppCompatActivity {
                     String emailAddresss = null;
 
 
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = pref.edit();
 
-                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+                    int countVal = pref.getInt("uValue", 0);
                     emailAddresss = pref.getString("uName", null);
 
                     URI cloudantUri = new URI(getApplicationContext().getResources().getString(R.string.cloudantUrl) + "/personal_info/" + emailAddresss);
@@ -100,7 +102,7 @@ public class UserHealthRecordUpdate extends AppCompatActivity {
 
                     Datastore dsOne = manager.openDatastore("health_info");
 
-                    DocumentRevision documentRevision = new DocumentRevision(emailAddresss);
+                    DocumentRevision documentRevision = new DocumentRevision(emailAddresss + countVal);
                     DocumentBody documentBody = DocumentBodyFactory.create(new HashMap<String, String>() {{
                         put("UserAllergies", userName.getText().toString());
                         put("UserIfUndergoneSurgery", userMobNo.getText().toString());
@@ -114,6 +116,8 @@ public class UserHealthRecordUpdate extends AppCompatActivity {
                     }});
                     documentRevision.setBody(documentBody);
                     dsOne.createDocumentFromRevision(documentRevision);
+
+                    editor.putInt("uValue", countVal + 1);
 
                     Snackbar.make(view, "Updation successful! Thank you for your cooperation!", Snackbar.LENGTH_LONG)
                             .setAction("Done", null).show();

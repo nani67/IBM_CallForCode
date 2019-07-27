@@ -132,6 +132,8 @@ public class MainActivity extends AppCompatActivity
 
                     editor.putString("uName", userEmail.getText().toString());
 
+                    editor.putInt("uValue", 0);
+
                     final EditText userName = findViewById(R.id.userName);
                     final EditText userMobNo = findViewById(R.id.userMobileNumber);
                     final EditText userDOB = findViewById(R.id.userDateOfBirth);
