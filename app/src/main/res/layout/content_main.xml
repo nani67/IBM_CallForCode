@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main"
+    tools:context="com.ibm.mysampleapp.MainActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/RegistrationLabel"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textSize="30sp"
+                android:text="Registration"
+                android:textColor="#000000"
+                android:layout_margin="16dp"
+                android:padding="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/detailsConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/RegistrationLabel">
+
+                <EditText
+                    android:id="@+id/userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Your Name"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/userMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Your Mobile Number"
+                    android:inputType="phone"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userName" />
+
+
+                <EditText
+                    android:id="@+id/userDateOfBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Your DOB"
+                    android:inputType="date"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userMobileNumber" />
+
+
+                <EditText
+                    android:id="@+id/userPlaceOfEmployment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Place of Employment"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userDateOfBirth" />
+
+
+                <EditText
+                    android:id="@+id/userOccupation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Your occupation"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userPlaceOfEmployment" />
+
+
+                <EditText
+                    android:id="@+id/userReligiousPreference"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Any Religious Preferences (Optional)"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userOccupation" />
+
+
+                <EditText
+                    android:id="@+id/userRelativesPhoneNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Relative's Phone number"
+                    android:inputType="phone"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userReligiousPreference" />
+
+                <EditText
+                    android:id="@+id/userEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Your Email ID"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userRelativesPhoneNo" />
+
+                <EditText
+                    android:id="@+id/userRelativesEmailID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Relative's Email ID"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userEmail" />
+
+
+
+                <EditText
+                    android:id="@+id/userGovernmentIDType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Government ID Type (optional)"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userRelativesEmailID"/>
+
+
+                <EditText
+                    android:id="@+id/userGovernmentIDNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Government ID Number(optional)"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userGovernmentIDType" />
+
+
+
+
+
+                <EditText
+                    android:id="@+id/userInsuranceCompanyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Insurance Company Name"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userGovernmentIDNo"/>
+
+
+                <EditText
+                    android:id="@+id/userInsurancePolicyNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Insurance Policy Number"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userInsuranceCompanyName" />
+
+
+                <EditText
+                    android:id="@+id/userPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="16dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userInsurancePolicyNo" />
+
+
+                <Button
+                    android:id="@+id/registrationInitiation"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="Register"
+                    android:textAllCaps="false"
+                    android:background="#E91E63"
+                    android:textColor="#ffffff"
+                    android:padding="16dp"
+                    android:layout_margin="32dp"
+                    app:layout_constraintTop_toBottomOf="@id/userPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/registrationInitiation"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+    
+
+</androidx.constraintlayout.widget.ConstraintLayout>

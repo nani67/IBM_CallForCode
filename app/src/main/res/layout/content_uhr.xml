@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserHealthRecordUpdate"
+    tools:showIn="@layout/activity_uhr">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/updateHealthRecordsLabel"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textSize="30sp"
+                android:text="Update Health Record(s)"
+                android:textColor="#000000"
+                android:layout_margin="16dp"
+                android:padding="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/detailsConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/updateHealthRecordsLabel">
+
+                <EditText
+                    android:id="@+id/userAllergies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Any Allergies (if any)"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/userIfUndergoneSurgery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Undergone Surgery (Y or N)"
+                    android:inputType="phone"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userAllergies" />
+
+
+                <EditText
+                    android:id="@+id/userBloodGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Your Blood Group"
+                    android:inputType="date"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userIfUndergoneSurgery" />
+
+
+                <EditText
+                    android:id="@+id/userDiseases"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Any diseases (seperated by ,)"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userBloodGroup" />
+
+
+                <EditText
+                    android:id="@+id/userSpecialEquipment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Any special implants"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userDiseases" />
+
+
+                <EditText
+                    android:id="@+id/userVitalSigns"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Vital Signs"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userSpecialEquipment" />
+
+
+                <EditText
+                    android:id="@+id/userMedications"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Medications (seperated by ,)"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userVitalSigns" />
+
+                <EditText
+                    android:id="@+id/userImmunizationDates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:hint="Immunization date (latest ones)"
+                    android:inputType="date"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userMedications" />
+
+                <Button
+                    android:id="@+id/userDiagnosisReport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:text="Any Diagnosis Report"
+                    android:background="@color/colorPrimary"
+                    android:textAllCaps="false"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userImmunizationDates" />
+
+
+
+                <Button
+                    android:id="@+id/userRadiologyImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:background="@color/colorPrimary"
+                    android:text="Radiology Images"
+                    android:textAllCaps="false"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userDiagnosisReport"/>
+
+
+                <Button
+                    android:id="@+id/updationInitiation"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="Update Health Record(s)"
+                    android:textAllCaps="false"
+                    android:background="#E91E63"
+                    android:textColor="#ffffff"
+                    android:padding="16dp"
+                    android:layout_margin="32dp"
+                    app:layout_constraintTop_toBottomOf="@id/userRadiologyImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/updationInitiation"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
