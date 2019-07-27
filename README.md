@@ -1,116 +1,30 @@
 # Project for IBM Call For Code 2019
 
-Rewriting Plaid using [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/), in Kotlin. 
-
-👀 "[Up for grabs](https://github.com/nickbutcher/plaid/issues?q=is%3Aissue+is%3Aopen+label%3A%22Up+for+grabs+%F0%9F%A4%9A%22)" issues – We're happy to [get your contributions](https://github.com/nickbutcher/plaid/blob/master/CONTRIBUTING.md#contributing-a-patch) on those!
+An android application which is developed to take the health information of the users and when a disaster strikes in their locality, this application helps to get their treatment based on their health information which can be accessed faster through their smartphone itself.
 
 👍 Comments and new issues created are welcomed.
 
-🛑 We're currently not accepting external PRs that touch on the app's architecture.
-
-[![CircleCI](https://circleci.com/gh/android/plaid/tree/master.svg?style=shield)](https://circleci.com/gh/android/plaid/tree/master)
-
 ### Background
 
-Plaid was written with one big goal: showcase material design in Android in a real application. While Plaid successfully achieved its goal, from an architecture point of view, it lacks all features that would make it a modular, scalable, testable and maintainable app: with UI logic in Android classes, no tests and only one module. 
-Plaid represents a great real world app example: it provides a fairly complex set of functionalities, it has technical debt, it has features that have to be dealt with as APIs are being removed.
-All of these problems are encountered by many projects in the Android community and therefore, make Plaid a suitable showcase for all the advantages that architecture components bring. 
+Being a team of three compassionate developers, we wanted to work for the society and helping people whenever required through our skills and the open-source technologies available. 
 
-#### More information
+And one day, we got to know about the IBM's love for society through their biggest attempt to save human lives through technology by conducting a Hackathon called "IBM Call For Code" and we loved their attempt and we started working for that and the result is the above code which was made with our passion and our mission of helping people and getting their things get done.
 
-* Read more:
-
-	* [Restitching Plaid - Updating Plaid to modern app standards](https://medium.com/@crafty/restitching-plaid-9ca5588d3b0a)
-	* [A patchwork Plaid - Monolith to modularized app](https://medium.com/androiddevelopers/a-patchwork-plaid-monolith-to-modularized-app-60235d9f212e)
-	* [Cross-stitching Plaid and AndroidX](https://medium.com/androiddevelopers/cross-stitching-plaid-and-androidx-7603a192348e)
-	* [Dependency injection in a multi module project](https://medium.com/androiddevelopers/dependency-injection-in-a-multi-module-project-1a09511c14b7)
-
-* Video Presentations:
-
-	* [Shaping Your App's Architecture with Kotlin and Architecture Components by Florina](https://youtu.be/Sy6ZdgqrQp0) (Florina Muntenescu at KotlinConf 2018)
-	* [Re-stitching Plaid with Kotlin](https://youtu.be/NNWejxBORgc) (Florina Muntenescu at Android Dev Summit '18)
-
-### Goals
-* Migrate Plaid to Architecture Components. The refactoring will follow the architecture described in [Guide to App Architecture](https://developer.android.com/jetpack/docs/guide).  
-* Convert to Kotlin, while migrating to Architecture Components.
-* Modularize the app using [dynamic feature modules](https://developer.android.com/guide/app-bundle/).
-* Showcase the extensibility of the architecture by adding an extra data source, once the migration is finished.
-
-### Non-Goals
-Changes to the styles, themes, icons, animations, transitions or any other UI elements that were the initial focus of Plaid, are outside the scope of this refactoring. 
-
-### Android Studio IDE setup
-
-Plaid requires Android Studio version 3.4 or higher.
-
-Plaid uses [ktlint](https://ktlint.github.io/) to enforce Kotlin coding styles.
-Here's how to configure it for use with Android Studio (instructions adapted
-from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)):
-
-- Close Android Studio if it's open
-- Download ktlint using these [installation instructions](https://github.com/shyiko/ktlint/blob/master/README.md#installation)
-
-- Inside the project root directory run:
-
-  `./ktlint --apply-to-idea-project --android`
-
-- Remove ktlint if desired:
-
-  `rm ktlint`
-
-- Start Android Studio
-
----
-
-# Plaid 1.0
-
-<img src="screenshots/plaid_demo.gif" width="300" align="right" hspace="20">
-
-*Design news and inspiration.*
-
-Plaid is a showcase of [material design](https://www.google.com/design/spec/) that we hope you will
-keep installed. It pulls in news & inspiration from [Designer News](https://www.designernews.co/),
-[Dribbble](https://dribbble.com/) & [Product Hunt](https://www.producthunt.com/). It demonstrates
-the use of
-[material principles](https://www.google.com/design/spec/material-design/introduction.html#introduction-principles)
-to create tactile, bold, understandable UIs.
-
-**[Install on Google Play (Beta Testing)](https://play.google.com/apps/testing/io.plaidapp)**
+### What does this do?
+* This is an attempt to help people to survive in a natural disaster.
+* This android application initially asks for their personal information and this is just a one-time-process
+* Next, the health information of the users is collected periodically and this is to ensure their information is updated and when a disaster occurs, that should help doctors to give treatment to that users accurately.
 
 
 ### Screenshots
 
 
-<img src="screenshots/home_grid_framed.png" width="25%" />
-<img src="screenshots/post_story_framed.png" width="25%" />
-<img src="screenshots/dn_story_framed.png" width="25%" />
-<img src="screenshots/dribbble_shot_framed.png" width="25%" />
-
-
-##### Non-Goals
-Plaid is a UI sample and seeks to demonstrate how to implement material design. To make this as clear as possible it explicitly does not attempt to:
-* Provide opinionated **architecture/testing** advice; it utilizes vanilla Android components. For advice on this, I'd recommend [Blueprints](https://github.com/googlesamples/android-architecture).
-* Support **pre-Lollipop** devices. Doing so is entirely possible, but complicates things. For advice on doing this, see [this fork](https://github.com/hzsweers/plaid/tree/z/moarbackport).
+<img src="screenshots/one.png" width="25%" />
+<img src="screenshots/two.png" width="25%" />
+<img src="screenshots/three.png" width="25%" />
+<img src="screenshots/four.png" width="25%" />
 
 
 ### License
-
-
-```
-Copyright 2015 Google, Inc.
-
-Licensed to the Apache Software Foundation (ASF) under one or more contributor
-license agreements. See the NOTICE file distributed with this work for
-additional information regarding copyright ownership. The ASF licenses this
-file to you under the Apache License, Version 2.0 (the "License"); you may not
-use this file except in compliance with the License. You may obtain a copy of
-the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-License for the specific language governing permissions and limitations under
+Guage governing permissions and limitations under
 the License.
-```
