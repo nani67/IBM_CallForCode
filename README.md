@@ -45,7 +45,7 @@ Cloudant Services.
 
 ### Roadmap
 
-<img src="screenshots/roadmap.jpeg" width="25%" />
+<img src="screenshots/roadmap.jpeg" />
 
 
 ### License
