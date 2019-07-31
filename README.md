@@ -43,6 +43,11 @@ Cloudant Services.
 <img src="screenshots/four.png" width="25%" />
 
 
+### Roadmap
+
+<img src="screenshots/roadmap.jpeg" />
+
+
 ### License
 Guage governing permissions and limitations under
 the License.
