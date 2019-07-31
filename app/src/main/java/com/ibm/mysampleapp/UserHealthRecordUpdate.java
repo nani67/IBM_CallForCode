@@ -82,7 +82,6 @@ public class UserHealthRecordUpdate extends AppCompatActivity {
 
                     String emailAddresss = null;
 
-
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                     SharedPreferences.Editor editor = pref.edit();
 
@@ -118,6 +117,7 @@ public class UserHealthRecordUpdate extends AppCompatActivity {
                     dsOne.createDocumentFromRevision(documentRevision);
 
                     editor.putInt("uValue", countVal + 1);
+                    editor.apply();
 
                     Snackbar.make(view, "Updation successful! Thank you for your cooperation!", Snackbar.LENGTH_LONG)
                             .setAction("Done", null).show();

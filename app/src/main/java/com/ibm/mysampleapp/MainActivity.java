@@ -1,8 +1,18 @@
 package com.ibm.mysampleapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +24,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.cloudant.mazha.Document;
 import com.cloudant.sync.datastore.DocumentBody;
 import com.cloudant.sync.datastore.DocumentBodyFactory;
@@ -28,9 +44,16 @@ import com.cloudant.sync.datastore.DatastoreManager;
 import com.cloudant.sync.datastore.DatastoreNotCreatedException;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -38,6 +61,8 @@ public class MainActivity extends AppCompatActivity
 {
     private java.net.URI cloudantUri;
     private DatastoreManager manager;
+
+    public static String AddressVal = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +72,75 @@ public class MainActivity extends AppCompatActivity
         final View view1 = findViewById(R.id.registerView);
         final View view2 = findViewById(R.id.loginView);
 
+
+        LocationManager locationManager =
+                (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        LocationProvider provider =
+                locationManager.getProvider(LocationManager.GPS_PROVIDER);
+
+
+        final LocationListener listener = new LocationListener() {
+
+            public void onLocationChanged(Location location) {
+                // Bypass reverse-geocoding if the Geocoder service is not available on the
+                // device. The isPresent() convenient method is only available on Gingerbread or above.
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD && Geocoder.isPresent()) {
+                    // Since the geocoding API is synchronous and may take a while.  You don't want to lock
+                    // up the UI thread.  Invoking reverse geocoding in an AsyncTask.
+                    (new ReverseGeocodingTask(getApplicationContext())).execute(new Location[] {location});
+                }
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        };
+
+
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://api.reliefweb.int/v1/reports?appname=testbeforecommit&limit=1";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonObject1 = (JSONArray) jsonObject.get("data");
+                    JSONObject jsonObject2 = jsonObject1.getJSONObject(0);
+                    JSONObject jsonArray = (JSONObject) jsonObject2.get("fields");
+
+                    String valueOfResponse = jsonArray.getString("title");
+
+//                    if(valueOfResponse.contains(AddressVal)) {
+//                        startActivity(new Intent(MainActivity.this, OnlyHealthDetails.class));
+//                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("onErrorResponse", error.toString());
+            }
+        }
+        );
+
+        queue.add(stringRequest);
 
         BMSClient.getInstance().initialize(getApplicationContext(), BMSClient.REGION_SYDNEY);
 
@@ -86,7 +180,6 @@ public class MainActivity extends AppCompatActivity
 
                     }
 
-
                     DocumentRevision a = userDetails.getDocument(loginID.getText().toString());
                     DocumentBody documentBody = a.getBody();
                     Map<String, Object> hashMap = documentBody.asMap();
@@ -96,8 +189,12 @@ public class MainActivity extends AppCompatActivity
                         SharedPreferences.Editor editor = pref.edit();
 
                         editor.putString("uName", loginID.getText().toString());
+                        editor.apply();
 
-                        startActivity(new Intent(MainActivity.this, UserHealthRecordUpdate.class));
+                        startActivity(new Intent(MainActivity.this, OnlyHealthDetails.class));
+
+
+                        //startActivity(new Intent(MainActivity.this, UserHealthRecordUpdate.class));
 
                     } else {
                         Snackbar.make(view, "Login credentials incorrect", Snackbar.LENGTH_LONG).show();
@@ -223,3 +320,42 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 }
+
+
+
+
+
+class ReverseGeocodingTask extends AsyncTask<Location, Void, Void> {
+    Context mContext;
+
+    public ReverseGeocodingTask(Context context) {
+        super();
+        mContext = context;
+    }
+
+    @Override
+    protected Void doInBackground(Location... params) {
+        Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
+
+        Location loc = params[0];
+        List<Address> addresses = null;
+        try {
+            // Call the synchronous getFromLocation() method by passing in the lat/long values.
+            addresses = geocoder.getFromLocation(loc.getLatitude(), loc.getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (addresses != null && addresses.size() > 0) {
+            Address address = addresses.get(0);
+            // Format the first line of address (if available), city, and country name.
+            String addressText = String.format("%s, %s, %s",
+                    address.getMaxAddressLineIndex() > 0 ? address.getAddressLine(0) : "",
+                    address.getLocality(),
+                    address.getCountryName());
+
+            MainActivity.AddressVal = address.getLocality();
+        }
+        return null;
+    }
+}
+
